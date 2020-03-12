@@ -14,6 +14,4 @@ solve them using the platform, but for the final deliverable,
 paste the code for each solution into this script, and upload it
 to your GitHub.
 
-Before starting with the questions, feel free to take your time,
-exploring the data, and getting acquainted with the 3 tables. */
 
