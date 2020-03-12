@@ -3,9 +3,9 @@
 
 The data you need is in the "country_club" database. This database
 contains 3 tables:
-    i) the "Bookings" table,
-    ii) the "Facilities" table, and
-    iii) the "Members" table.
+- i) the "Bookings" table,
+- ii) the "Facilities" table, and
+- iii) the "Members" table.
 
 Note that, if you need to, you can also download these tables locally.
 
