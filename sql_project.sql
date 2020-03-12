@@ -69,13 +69,53 @@ the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
 
+SELECT f.name AS facility,
+	CONCAT( m.firstname,  ' ', m.surname ) AS member_name,
+	CASE WHEN m.memid = 0 THEN b.slots*f.guestcost 
+	ELSE b.slots*f.membercost END AS cost
+FROM country_club.Bookings b
+JOIN country_club.Members m 
+ON b.memid = m.memid
+JOIN country_club.Facilities f 
+ON b.facid = f.facid
+
+WHERE b.starttime >= '2012-09-14' AND b.starttime < '2012-09-15' AND ((m.memid = 0 AND b.slots*f.guestcost > 30) OR (m.memid != 0 AND b.slots*f.membercost > 30))
+ORDER BY cost DESC
+
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
+SELECT facility, member_name, cost FROM (
+    	SELECT f.name AS facility,
+		CONCAT(m.firstname, ' ', m.surname) AS member_name,
+	CASE WHEN m.memid = 0 THEN b.slots*f.guestcost 
+		ELSE b.slots*f.membercost END AS cost
+	FROM country_club.Bookings b
+	JOIN country_club.Members m 
+		ON b.memid = m.memid
+	JOIN country_club.Facilities f 
+		ON b.facid = f.facid
+	WHERE b.starttime >= '2012-09-14' AND b.starttime < '2012-09-15' 
+) as bookings
+WHERE COST > 30
+ORDER BY cost DESC
 
 
 /* Q10: Produce a list of facilities with a total revenue less than 1000.
 The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
 
+/* Q10: Produce a list of facilities with a total revenue less than 1000.
+The output of facility name and total revenue, sorted by revenue. Remember
+that there's a different cost for guests and members! */
 
+SELECT f.name, SUM(b.slots * (
+CASE WHEN b.memid = 0 THEN f.guestcost 
+    ELSE f.membercost END)) AS revenue
+FROM country_club.Bookings AS b
+JOIN country_club.Facilities AS f 
+ON b.facid = f.facid
+
+GROUP BY f.name
+HAVING revenue < 1000
+ORDER BY revenue
 
