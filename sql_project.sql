@@ -62,6 +62,20 @@ ON b.facid = f.facid
 WHERE f.name LIKE 'Tennis Court%'
 ORDER BY member_name 
 
+/* Q8: How can you produce a list of bookings on the day of 2012-09-14 which
+will cost the member (or guest) more than $30? Remember that guests have
+different costs to members (the listed costs are per half-hour 'slot'), and
+the guest user's ID is always 0. Include in your output the name of the
+facility, the name of the member formatted as a single column, and the cost.
+Order by descending cost, and do not use any subqueries. */
+
+
+/* Q9: This time, produce the same result as in Q8, but using a subquery. */
+
+
+/* Q10: Produce a list of facilities with a total revenue less than 1000.
+The output of facility name and total revenue, sorted by revenue. Remember
+that there's a different cost for guests and members! */
 
 
 
